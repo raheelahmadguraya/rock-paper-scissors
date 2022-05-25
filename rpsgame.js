@@ -32,7 +32,7 @@ function playRound(playerSelection, computerSelection) {
         }
         else if(computerSelection == "scissors") {
             computerScore += 1;
-            return "You Lose! Scissors beats Rock"
+            return "You Lose! Scissors beats Paper"
         }
     }
     else if(playerSelection == "scissors") {
@@ -50,13 +50,32 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function getPlayerInput(){
+    let shape = window.prompt("Rock Paper Scissors!\nEnter Rock, Paper or Scissors:" )
+    shape = shape.toLowerCase();
+    let keepGoing = true;
+    while(keepGoing){
+        if(shape === "rock" || shape === "paper" || shape === "scissors"){
+            keepGoing = false;
+        }
+        else{
+            shape = window.prompt("Invalid Input\nPlease enter Rock, Paper or Scissors:" )
+            shape = shape.toLowerCase();
+        }
+    }
+    return shape;
+}
+
 // game function, calls playRound function to play 5 rounds of a game
 // keeps track of score
 function game(){
     for (let i = 0; i < 5; i++){
+        console.log("\nRound:",(i + 1));
         computerSelection = computerPlay();
-        playerSelection = "rock";
-        playRound(playerSelection, computerSelection);
+        playerSelection = getPlayerInput();
+        console.log("Computer chooses:", computerSelection)
+        console.log("Player chooses:", playerSelection)
+        console.log(playRound(playerSelection, computerSelection));
     }
 }
 
